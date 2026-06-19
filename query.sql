@@ -1,6 +1,7 @@
 -------------------------------------------------------
 -- Create Users Table and Insert data to the User Table
 -------------------------------------------------------
+
 CREATE TABLE
     Users (
         user_id INT PRIMARY KEY,
@@ -42,10 +43,10 @@ VALUES
         NULL
     );
 
-
 ------------------------------------------------------------
 -- Create Matches Table and Insert data to the Matches Table
 ------------------------------------------------------------
+
 CREATE TABLE
     Matches (
         match_id INT PRIMARY KEY,
@@ -110,6 +111,7 @@ VALUES
 --------------------------------------------------------------
 -- Create Bookings Table and Insert data to the Bookings Table
 --------------------------------------------------------------
+
 CREATE TABLE
     Bookings (
         booking_id INT PRIMARY KEY,
@@ -143,17 +145,39 @@ VALUES
 -------------------------------------------------------------------------------------------------------------------------------
 -- Query 01 : Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
 -------------------------------------------------------------------------------------------------------------------------------
+
 select
-    *
+    match_id, fixture, base_ticket_price
 from
     matches
 where
     tournament_category = 'Champions League'
     and match_status = 'Available'
 
------------------------------------------------------------------------------------------------------------------------
--- Query 2: Search for all users whose full names start with 'Tanvir' or contain the phrase 'Haque' (case-insensitive).
------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------
+    -- Query 2: Search for all users whose full names start with 'Tanvir' or contain the phrase 'Haque' (case-insensitive).
+    -----------------------------------------------------------------------------------------------------------------------
 
-select user_id, full_name, email from users where full_name ilike 'Tanvir%' or full_name ilike '%Haque%'
+select
+    user_id,
+    full_name,
+    email
+from
+    users
+where
+    full_name ilike 'Tanvir%'
+    or full_name ilike '%Haque%'
 
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    -- Query 3: Retrieve all booking records where the payment status is missing (NULL), replacing the empty result with 'Action Required'.
+    ---------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT
+    booking_id,
+    user_id,
+    match_id,
+    COALESCE(payment_status, 'Action Required') AS payment_status
+FROM
+    bookings
+WHERE
+    payment_status IS NULL;
