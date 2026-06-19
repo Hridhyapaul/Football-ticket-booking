@@ -189,3 +189,10 @@ WHERE
     select booking_id, full_name, fixture, total_cost from bookings as b 
     inner join users as u on b.user_id = u.user_id
     inner join matches as m on b.match_id = m.match_id
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    -- Query 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    select u.user_id, u.full_name, b.booking_id from users as u
+    left join bookings as b on u.user_id = b.user_id;
