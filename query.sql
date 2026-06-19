@@ -140,5 +140,16 @@ VALUES
     (504, 2, 101, NULL, NULL, 150.00),
     (505, 3, 102, 'C-20', 'Pending', 120.00);
 
+-------------------------------------------------------------------------------------------------------------------------------
+-- Query 01 : Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
+-------------------------------------------------------------------------------------------------------------------------------
+select
+    *
+from
+    matches
+where
+    tournament_category = 'Champions League'
+    and match_status = 'Available'
+
 
 
